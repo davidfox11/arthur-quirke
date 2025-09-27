@@ -43,7 +43,7 @@ export function Hero() {
             className="mb-8"
           >
             <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl">
-              The Amazing Life of Arthur
+              Welcome to Arthur's World
             </h1>
             <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto mb-6" />
           </motion.div>
@@ -54,10 +54,10 @@ export function Hero() {
             transition={{ delay: 0.6 }}
             className="mb-8 max-w-xl mx-auto text-white/90 leading-relaxed text-base sm:text-lg drop-shadow-lg px-2"
           >
-            Welcome to Arthur's extraordinary journey through life. From his
-            very first breath to all the incredible adventures that lie ahead,
-            discover the milestones, memories, and magical moments that make his
-            story truly special.
+            This is a gift for Arthur from his godfather to celebrate his life
+            and all the amazing memories that he is sure to collect along the
+            way! Please feel free to reach out if you have any nice Arthur
+            content you would like to add.
           </motion.p>
 
           <motion.div
@@ -76,7 +76,7 @@ export function Hero() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Begin His Journey</span>
+              <span>Check out the highlights</span>
               <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-1 transition-transform" />
             </motion.button>
 

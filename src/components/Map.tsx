@@ -15,6 +15,11 @@ import {
 } from "react-simple-maps";
 import artIcon from "../assets/art1.png";
 
+import amsterdamImage from "../assets/amsterdam.jpg";
+import portugalImage from "../assets/portugal.jpg";
+import wicklowImage from "../assets/wicklow.jpg";
+import corkImage from "../assets/xmas.jpg";
+
 interface Location {
   id: string;
   name: string;
@@ -32,114 +37,63 @@ interface Location {
 const locations: Location[] = [
   {
     id: "1",
-    name: "London",
-    country: "United Kingdom",
-    coordinates: [-0.1278, 51.5074],
-    visitDate: "July 2023",
+    name: "Dublin",
+    country: "Ireland",
+    coordinates: [-6.2603, 53.3498],
+    visitDate: "September 2024",
     description:
-      "Arthur's first international adventure! The bustling capital city amazed him with its rich history, iconic landmarks, and double-decker buses.",
-    highlights: ["Big Ben", "London Eye", "Tower Bridge", "Hyde Park"],
+      "Arthur's story begins! The vibrant city where he was born and spent his early days.",
+    highlights: ["Merrion Square", "First Home", "Family Time"],
     type: "city",
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop",
+    image: wicklowImage,
     memories:
-      "Arthur was fascinated by the changing of the guard at Buckingham Palace and spent hours watching the Thames from Tower Bridge.",
-    color: "#3b82f6",
-  },
-  {
-    id: "2",
-    name: "Paris",
-    country: "France",
-    coordinates: [2.3522, 48.8566],
-    visitDate: "August 2023",
-    description:
-      "The City of Light captured Arthur's imagination with its beautiful architecture, delicious pastries, and the magnificent Eiffel Tower.",
-    highlights: [
-      "Eiffel Tower",
-      "Louvre Museum",
-      "Seine River",
-      "Champs-Élysées",
-    ],
-    type: "city",
-    image:
-      "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=800&h=600&fit=crop",
-    memories:
-      'Arthur\'s eyes lit up when he first saw the Eiffel Tower sparkling at night. He learned to say "bonjour" and "merci".',
-    color: "#ef4444",
-  },
-  {
-    id: "3",
-    name: "Swiss Alps",
-    country: "Switzerland",
-    coordinates: [8.2275, 46.8182],
-    visitDate: "December 2023",
-    description:
-      "Arthur's first time seeing snow-capped mountains! The pristine alpine landscape created magical winter memories.",
-    highlights: [
-      "Snow activities",
-      "Mountain railways",
-      "Alpine villages",
-      "Hot chocolate",
-    ],
-    type: "mountain",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-    memories:
-      "Building his first snowman and taking his first cable car ride up the mountains were highlights.",
-    color: "#8b5cf6",
-  },
-  {
-    id: "4",
-    name: "Barcelona",
-    country: "Spain",
-    coordinates: [2.1734, 41.3851],
-    visitDate: "March 2024",
-    description:
-      "The vibrant Catalan city dazzled Arthur with its unique architecture, beautiful beaches, and lively street culture.",
-    highlights: ["Sagrada Familia", "Park Güell", "Beach time", "Las Ramblas"],
-    type: "city",
-    image:
-      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&h=600&fit=crop",
-    memories:
-      "Arthur was mesmerized by Gaudí's colorful mosaics and spent hours collecting seashells on Mediterranean beaches.",
-    color: "#f97316",
-  },
-  {
-    id: "5",
-    name: "Scottish Highlands",
-    country: "Scotland",
-    coordinates: [-4.0, 57.0],
-    visitDate: "May 2024",
-    description:
-      "Ancient castles, mystical lochs, and rolling green hills introduced Arthur to Scotland's breathtaking natural beauty.",
-    highlights: [
-      "Loch Ness",
-      "Edinburgh Castle",
-      "Highland games",
-      "Bagpipe music",
-    ],
-    type: "nature",
-    image:
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&h=600&fit=crop",
-    memories:
-      "Arthur loved searching for the Loch Ness Monster and was thrilled to hear bagpipe music echoing through the valleys.",
+      "From his first moments in Merrion Square to settling into his first home, Dublin is where it all started.",
     color: "#10b981",
   },
   {
-    id: "6",
-    name: "Rome",
-    country: "Italy",
-    coordinates: [12.4964, 41.9028],
-    visitDate: "September 2024",
+    id: "2",
+    name: "Cork",
+    country: "Ireland",
+    coordinates: [-8.4729, 51.8969],
+    visitDate: "October 2024",
     description:
-      "The Eternal City transported Arthur back in time with its ancient ruins, stunning art, and authentic Italian culture.",
-    highlights: ["Colosseum", "Vatican City", "Trevi Fountain", "Gelato shops"],
-    type: "historical",
-    image:
-      "https://images.unsplash.com/photo-1552832230-c0197047daf1?w=800&h=600&fit=crop",
+      "Arthur's first trip to visit family, exploring the beautiful coastline and charming towns.",
+    highlights: ["Myrtleville", "Glandore", "First Christmas", "First Swim"],
+    type: "nature",
+    image: corkImage,
     memories:
-      "Throwing a coin in the Trevi Fountain and making a wish was magical. His favorite discovery was the many flavors of gelato!",
-    color: "#f59e0b",
+      "Many happy memories were made visiting grandparents, including a very memorable first dip in the sea!",
+    color: "#3b82f6",
+  },
+  {
+    id: "3",
+    name: "Amsterdam",
+    country: "Netherlands",
+    coordinates: [4.895168, 52.370216],
+    visitDate: "January 2025",
+    description:
+      "Arthur's first international adventure, jetting off to the picturesque city of canals.",
+    highlights: ["First Flight", "Visiting Aunt Louise", "Canal Views"],
+    type: "city",
+    image: amsterdamImage,
+    memories:
+      "The excitement of his first plane ride to visit his aunt Louise was a milestone to remember.",
+    color: "#f97316",
+  },
+  {
+    id: "4",
+    name: "Faro",
+    country: "Portugal",
+    coordinates: [-7.9304, 37.0194],
+    visitDate: "March 2025",
+    description:
+      "A sunny getaway and the perfect place to celebrate a first birthday in style.",
+    highlights: ["Sun Holiday", "First Birthday Party", "Beach Time"],
+    type: "beach",
+    image: portugalImage,
+    memories:
+      "Arthur celebrated his first trip around the sun with family on the beautiful beaches of Portugal.",
+    color: "#ef4444",
   },
 ];
 
@@ -229,31 +183,6 @@ function LocationMarker({ location, onClick, index }: LocationMarkerProps) {
             <img src={artIcon} alt="Art" className="w-3 h-3" />
           </div>
         </foreignObject>
-
-        {/* Location label on hover */}
-        <motion.g
-          initial={{ opacity: 0, y: 5 }}
-          whileHover={{ opacity: 1, y: -15 }}
-          transition={{ duration: 0.2 }}
-        >
-          <rect
-            x={-25}
-            y={-35}
-            width={50}
-            height={20}
-            rx={8}
-            fill="rgba(0, 0, 0, 0.8)"
-            className="drop-shadow-lg"
-          />
-          <text
-            textAnchor="middle"
-            y={-22}
-            className="fill-white text-xs font-medium"
-            style={{ fontSize: "10px" }}
-          >
-            {location.name}
-          </text>
-        </motion.g>
       </motion.g>
     </Marker>
   );
@@ -309,18 +238,6 @@ export function Map() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={
-              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
-            }
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-6 py-3 mb-8 shadow-lg"
-          >
-            <Plane className="w-5 h-5 text-blue-600" />
-            <span className="font-bold text-blue-700">World Explorer</span>
-          </motion.div>
-
           <h2 className="mb-6 text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Arthur's Adventures
           </h2>
@@ -432,61 +349,6 @@ export function Map() {
           </motion.div>
         </motion.div>
 
-        {/* Travel Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="mt-12 max-w-4xl mx-auto"
-        >
-          <h3 className="text-2xl mb-8 text-center text-gray-800">
-            Journey Timeline
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {locations.map((location, index) => (
-              <motion.div
-                key={location.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                onClick={() => setSelectedLocation(location)}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/50 cursor-pointer group"
-              >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: location.color }}
-                  >
-                    <span className="text-white text-sm font-bold">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                      {location.name}
-                    </h4>
-                    <p className="text-xs text-gray-600">
-                      {location.visitDate}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-700 line-clamp-2">
-                  {location.description}
-                </p>
-                <div className="flex items-center mt-3 space-x-2">
-                  <img src={artIcon} alt="Art" className="w-4 h-4" />
-                  <span className="text-xs text-gray-500 capitalize">
-                    {location.type}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -556,7 +418,7 @@ export function Map() {
                   <img
                     src={selectedLocation.image}
                     alt={selectedLocation.name}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
 

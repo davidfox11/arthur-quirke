@@ -1,71 +1,103 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
-import { X, Heart, Camera } from 'lucide-react';
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "motion/react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import { X, Heart, Camera, ChevronLeft, ChevronRight } from "lucide-react";
 
+import momImage from "../assets/mom.jpg";
+import dadImage from "../assets/dad.jpg";
+import grandmaImage from "../assets/grandma-noreen.jpg";
+import davidImage from "../assets/uncle-david.jpg";
+import jennyImage from "../assets/aunt-jenny.jpg";
+import louImage from "../assets/aunt-lou.jpg";
+import lisaImage from "../assets/aunt-lisa.jpg";
 interface Photo {
   id: string;
   src: string;
-  alt: string;
   title: string;
   date: string;
-  description: string;
 }
 
 const photos: Photo[] = [
   {
-    id: '1',
-    src: 'https://images.unsplash.com/photo-1624272887610-dbf9bc1483f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNoaWxkJTIwcGxheWluZyUyMG91dGRvb3JzfGVufDF8fHx8MTc1ODk4NjUzOXww&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Arthur playing outdoors',
-    title: 'Adventure Time',
-    date: 'Summer 2023',
-    description: 'Arthur exploring the great outdoors with endless curiosity and joy.'
+    id: "1",
+    src: momImage,
+    title: "Mom",
+    date: "October 2024",
   },
   {
-    id: '2',
-    src: 'https://images.unsplash.com/photo-1502201661686-673f2fdb8da7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMGJpcnRoZGF5JTIwY2VsZWJyYXRpb258ZW58MXx8fHwxNzU4OTg2NTQyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Arthur birthday celebration',
-    title: 'Birthday Magic',
-    date: 'September 2023',
-    description: 'Another year of wonderful memories and birthday wishes come true.'
+    id: "2",
+    src: dadImage,
+    title: "Dad",
+    date: "December 2024",
   },
   {
-    id: '3',
-    src: 'https://images.unsplash.com/photo-1538118160270-1529bee869ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjBtb21lbnRzJTIwY2hpbGRyZW58ZW58MXx8fHwxNzU4OTg2NTQ0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Family moments with Arthur',
-    title: 'Family Love',
-    date: 'Spring 2023',
-    description: 'Precious family moments that warm our hearts and create lasting bonds.'
+    id: "3",
+    src: grandmaImage,
+    title: "Grandma Noreen",
+    date: "December 2024",
   },
   {
-    id: '4',
-    src: 'https://images.unsplash.com/photo-1610552254576-9500a3e99999?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMGxlYXJuaW5nJTIwc2Nob29sfGVufDF8fHx8MTc1ODk4NjU0N3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Arthur learning at school',
-    title: 'Learning Journey',
-    date: 'Fall 2023',
-    description: 'Arthur\'s curiosity and love for learning shines through every day.'
+    id: "4",
+    src: davidImage,
+    title: "Uncle David",
+    date: "December 2024",
   },
   {
-    id: '5',
-    src: 'https://images.unsplash.com/photo-1627540458907-47a427507e20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMHN3aW1taW5nJTIwcG9vbHxlbnwxfHx8fDE3NTg5ODY1NTB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Arthur swimming',
-    title: 'Water Adventures',
-    date: 'Summer 2023',
-    description: 'Conquering fears and making a splash in his swimming journey.'
+    id: "5",
+    src: jennyImage,
+    title: "Aunt Jenny",
+    date: "Summer 2023",
   },
   {
-    id: '6',
-    src: 'https://images.unsplash.com/photo-1652729926136-c8415ecff12b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMHJpZGluZyUyMGJpY3ljbGV8ZW58MXx8fHwxNzU4OTg2NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Arthur riding bicycle',
-    title: 'Freedom on Wheels',
-    date: 'Winter 2020',
-    description: 'The joy of independence and the thrill of riding without training wheels.'
-  }
+    id: "6",
+    src: louImage,
+    title: "Aunt Louise",
+    date: "January 2025",
+  },
+  {
+    id: "7",
+    src: lisaImage,
+    title: "Aunt Lisa",
+    date: "May 2025",
+  },
 ];
 
 export function PhotoGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+
+  const handleNavigation = useCallback(
+    (direction: "next" | "prev") => {
+      if (!selectedPhoto) return;
+      const currentIndex = photos.findIndex((p) => p.id === selectedPhoto.id);
+      let nextIndex;
+      if (direction === "next") {
+        nextIndex = (currentIndex + 1) % photos.length;
+      } else {
+        nextIndex = (currentIndex - 1 + photos.length) % photos.length;
+      }
+      setSelectedPhoto(photos[nextIndex]);
+    },
+    [selectedPhoto]
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        handleNavigation("next");
+      } else if (event.key === "ArrowLeft") {
+        handleNavigation("prev");
+      }
+    };
+
+    if (selectedPhoto) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedPhoto, handleNavigation]);
 
   return (
     <section id="gallery" className="relative py-20 px-6 overflow-hidden">
@@ -73,7 +105,7 @@ export function PhotoGallery() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/15 via-indigo-100/10 to-slate-100/10" />
         <div className="absolute inset-0 bg-gradient-to-tl from-blue-50/8 via-indigo-50/8 to-slate-50/5" />
-        
+
         {/* Floating elements */}
         {[...Array(6)].map((_, i) => (
           <motion.div
@@ -87,7 +119,7 @@ export function PhotoGallery() {
               duration: 12 + i * 2,
               repeat: Infinity,
               delay: i * 2,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
             className="absolute w-20 h-20 bg-gradient-to-br from-blue-400/15 to-indigo-400/15 rounded-full blur-xl"
             style={{
@@ -114,16 +146,12 @@ export function PhotoGallery() {
           >
             <Camera className="w-5 h-5 text-blue-400" />
             <span className="font-medium bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Precious Moments
+              Arthur's Family & Friends
             </span>
           </motion.div>
 
-          <h2 className="mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-            Memory Gallery
-          </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto text-lg leading-relaxed">
-            A beautiful collection of moments capturing Arthur's joy, growth, and adventures. 
-            Each photo tells a story of love, laughter, and precious memories that warm our hearts.
+            This is a collection of all the wonderful people in Arthur's life
           </p>
         </motion.div>
 
@@ -133,20 +161,20 @@ export function PhotoGallery() {
               key={photo.id}
               initial={{ opacity: 0, y: 60, scale: 0.8 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: index * 0.1,
                 type: "spring",
-                stiffness: 100
+                stiffness: 100,
               }}
               viewport={{ once: true }}
               className="group cursor-pointer"
               onClick={() => setSelectedPhoto(photo)}
             >
-              <motion.div 
+              <motion.div
                 className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl"
-                whileHover={{ 
-                  scale: 1.05, 
+                whileHover={{
+                  scale: 1.05,
                   y: -10,
                   rotateY: 5,
                 }}
@@ -155,13 +183,13 @@ export function PhotoGallery() {
                 <div className="relative overflow-hidden">
                   <ImageWithFallback
                     src={photo.src}
-                    alt={photo.alt}
+                    alt={photo.title}
                     className="w-full h-80 object-cover transition-all duration-500 group-hover:scale-110"
                   />
-                  
+
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Floating particles */}
                   <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     {[...Array(4)].map((_, i) => (
@@ -214,32 +242,51 @@ export function PhotoGallery() {
       </div>
 
       {/* Photo Modal */}
-      <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+      <Dialog
+        open={!!selectedPhoto}
+        onOpenChange={() => setSelectedPhoto(null)}
+      >
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
           <DialogTitle className="sr-only">
-            {selectedPhoto?.title || 'Photo Details'}
+            {selectedPhoto?.title || "Photo Details"}
           </DialogTitle>
           {selectedPhoto && (
             <div className="relative">
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 z-30 w-8 h-8 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
+              {/* Navigation Arrows */}
+              <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 space-x-4">
+                <button
+                  onClick={() => handleNavigation("prev")}
+                  className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => handleNavigation("next")}
+                  className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
               <ImageWithFallback
                 src={selectedPhoto.src}
-                alt={selectedPhoto.alt}
-                className="w-full h-96 object-cover"
+                alt={selectedPhoto.title}
+                className="w-full h-[80vh] object-contain"
               />
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-foreground">{selectedPhoto.title}</h3>
-                  <span className="text-sm text-muted-foreground">{selectedPhoto.date}</span>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 pb-24">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-white font-bold text-lg">
+                    {selectedPhoto.title}
+                  </h3>
+                  <span className="text-sm text-white/80">
+                    {selectedPhoto.date}
+                  </span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {selectedPhoto.description}
-                </p>
               </div>
             </div>
           )}

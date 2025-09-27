@@ -655,16 +655,6 @@ export function Timeline() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-6 py-3 mb-8 shadow-lg"
-          >
-            <Clock className="w-5 h-5 text-blue-600" />
-            <span className="font-bold text-blue-700">Life's Journey</span>
-          </motion.div>
-
           <h2 className="mb-6 text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Arthur's Timeline
           </h2>
