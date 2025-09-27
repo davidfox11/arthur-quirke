@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Sparkles, ArrowDown } from 'lucide-react';
+import { motion, useScroll, useTransform } from "motion/react";
+import { Sparkles, ArrowDown } from "lucide-react";
+import heroBackgroundImage from "../assets/images/hero.jpg";
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -7,26 +8,29 @@ export function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Portrait Background with Artistic Effects */}
       <div className="absolute inset-0">
         {/* Portrait Image with Sketch Effect */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1748200100427-52921dec8597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMHNrZXRjaCUyMGJveSUyMGNoaWxkJTIwYXJ0aXN0aWN8ZW58MXx8fHwxNzU4OTkwMDYzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+            backgroundImage: `url(${heroBackgroundImage})`,
           }}
         />
-        
+
         {/* Artistic Overlay Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-blue-800/40 to-indigo-900/50" />
-        <div className="absolute inset-0 bg-gradient-to-tl from-slate-900/30 via-transparent to-blue-900/40" />
-        
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-blue-800/40 to-indigo-900/50" /> */}
+        {/* <div className="absolute inset-0 bg-gradient-to-tl from-slate-900/30 via-transparent to-blue-900/40" /> */}
+
         {/* Sketch-like texture overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-blue-100/10 mix-blend-overlay" />
-        
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-blue-100/10 mix-blend-overlay" /> */}
+
         {/* Animated Light Rays */}
-        <motion.div
+        {/* <motion.div
           animate={{
             opacity: [0.1, 0.3, 0.1],
             scale: [1, 1.1, 1],
@@ -34,11 +38,11 @@ export function Hero() {
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
           className="absolute top-0 left-1/4 w-96 h-full bg-gradient-to-b from-blue-200/10 via-blue-300/5 to-transparent transform -skew-x-12"
-        />
-        
+        /> */}
+
         {/* Floating Artistic Elements */}
         <motion.div
           animate={{
@@ -49,36 +53,25 @@ export function Hero() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
           className="absolute top-1/4 right-1/4 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/30 rounded-full blur-xl"
         />
-        
+
         {/* Bottom fade to content */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent" />
       </div>
 
       {/* Content */}
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6"
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center justify-center mb-6"
-          >
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-4 py-2 sm:px-6 sm:py-3 shadow-2xl">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-200" />
-              <span className="font-medium text-sm sm:text-base text-white/90">
-                Meet Arthur - A Life Full of Wonder
-              </span>
-            </div>
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -90,18 +83,19 @@ export function Hero() {
             </h1>
             <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto mb-6" />
           </motion.div>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             className="mb-8 max-w-xl mx-auto text-white/90 leading-relaxed text-base sm:text-lg drop-shadow-lg px-2"
           >
-            Welcome to Arthur's extraordinary journey through life. From his very first breath to all the 
-            incredible adventures that lie ahead, discover the milestones, memories, and magical moments 
-            that make his story truly special.
+            Welcome to Arthur's extraordinary journey through life. From his
+            very first breath to all the incredible adventures that lie ahead,
+            discover the milestones, memories, and magical moments that make his
+            story truly special.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +103,11 @@ export function Hero() {
             className="space-y-6"
           >
             <motion.button
-              onClick={() => document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("timeline")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="group relative inline-flex items-center space-x-2 sm:space-x-3 bg-white/20 backdrop-blur-md border border-white/30 text-white px-6 py-3 sm:px-10 sm:py-4 rounded-full font-medium transition-all duration-300 hover:bg-white/30 hover:shadow-2xl hover:shadow-white/20 text-sm sm:text-base"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -117,7 +115,7 @@ export function Hero() {
               <span>Begin His Journey</span>
               <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-1 transition-transform" />
             </motion.button>
-            
+
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -143,7 +141,7 @@ export function Hero() {
               duration: 3 + i,
               repeat: Infinity,
               delay: i * 0.5,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
             className={`absolute w-2 h-2 bg-gradient-to-r from-white/40 to-blue-200/60 rounded-full opacity-80`}
             style={{

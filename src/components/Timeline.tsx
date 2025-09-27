@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Badge } from './ui/badge';
-import { Calendar, MapPin, Star, Sparkles, Baby, GraduationCap, Trophy, Clock } from 'lucide-react';
+import { useState, useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Badge } from "./ui/badge";
+import { Calendar, MapPin, Sparkles, Baby, Trophy, Clock } from "lucide-react";
+import heroBackgroundImage from "../assets/images/hero.jpg";
 
 interface TimelineEvent {
   id: string;
@@ -10,101 +11,141 @@ interface TimelineEvent {
   title: string;
   description: string;
   details: string;
-  type: 'birth' | 'milestone' | 'achievement' | 'memory';
+  type: "birth" | "milestone" | "achievement" | "memory";
   location?: string;
   image?: string;
 }
 
 const timelineEvents: TimelineEvent[] = [
   {
-    id: '1',
-    date: 'September 9, 2015',
-    title: 'Arthur is Born!',
-    description: 'The most wonderful day - Arthur enters the world',
-    details: 'Arthur was born at 3:42 AM, weighing 7 lbs 2 oz. From the moment he arrived, he filled our hearts with endless joy and wonder. His first cry was music to our ears, and his tiny fingers wrapped around ours with such strength.',
-    type: 'birth',
-    location: 'City Hospital',
-    image: 'https://images.unsplash.com/photo-1626296421777-65b29470dd5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXdib3JuJTIwYmFieSUyMGhvc3BpdGFsfGVufDF8fHx8MTc1ODk5MDA2NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+    id: "1",
+    date: "September 9, 2015",
+    title: "Arthur is Born!",
+    description: "The most wonderful day - Arthur enters the world",
+    details:
+      "Arthur was born at 3:42 AM, weighing 7 lbs 2 oz. From the moment he arrived, he filled our hearts with endless joy and wonder. His first cry was music to our ears, and his tiny fingers wrapped around ours with such strength.",
+    type: "birth",
+    location: "City Hospital",
+    image: heroBackgroundImage,
   },
   {
-    id: '2',
-    date: 'October 15, 2015',
-    title: 'First Smile',
-    description: 'Arthur\'s first genuine smile melted everyone\'s heart',
-    details: 'At just 5 weeks old, Arthur gave us his first real smile. It wasn\'t just gas - it was a genuine, heart-melting smile that lit up his entire face. This was the moment we knew he was truly connecting with the world around him.',
-    type: 'milestone',
-    image: 'https://images.unsplash.com/photo-1626296421777-65b29470dd5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXdib3JuJTIwYmFieSUyMGhvc3BpdGFsfGVufDF8fHx8MTc1ODk5MDA2NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+    id: "2",
+    date: "October 15, 2015",
+    title: "First Smile",
+    description: "Arthur's first genuine smile melted everyone's heart",
+    details:
+      "At just 5 weeks old, Arthur gave us his first real smile. It wasn't just gas - it was a genuine, heart-melting smile that lit up his entire face. This was the moment we knew he was truly connecting with the world around him.",
+    type: "milestone",
+    image: heroBackgroundImage,
   },
   {
-    id: '3',
-    date: 'March 22, 2016',
-    title: 'First Steps',
-    description: 'Arthur takes his first independent steps',
-    details: 'After months of cruising along furniture and taking tentative steps while holding our hands, Arthur finally took three wobbly but determined steps on his own. He looked so proud of himself, clapping and giggling with delight.',
-    type: 'milestone',
-    location: 'Living Room',
-    image: 'https://images.unsplash.com/photo-1608093602519-ccd31f515f83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWJ5JTIwZmlyc3QlMjBzdGVwcyUyMHdhbGtpbmd8ZW58MXx8fHwxNzU4OTkwMDY0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+    id: "3",
+    date: "March 22, 2016",
+    title: "First Steps",
+    description: "Arthur takes his first independent steps",
+    details:
+      "After months of cruising along furniture and taking tentative steps while holding our hands, Arthur finally took three wobbly but determined steps on his own. He looked so proud of himself, clapping and giggling with delight.",
+    type: "milestone",
+    location: "Living Room",
+    image: heroBackgroundImage,
   },
   {
-    id: '4',
-    date: 'September 9, 2018',
-    title: 'First Day of Preschool',
-    description: 'Arthur starts his educational journey',
-    details: 'Arthur was both excited and nervous for his first day of preschool. He picked out his favorite backpack and insisted on bringing his stuffed elephant for comfort. By pickup time, he had made two new friends and was already asking when he could go back.',
-    type: 'achievement',
-    location: 'Sunshine Preschool',
-    image: 'https://images.unsplash.com/photo-1742054292260-8a02cf5d0b1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMGZpcnN0JTIwZGF5JTIwc2Nob29sJTIwYmFja3BhY2t8ZW58MXx8fHwxNzU4OTkwMDY1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+    id: "4",
+    date: "September 9, 2018",
+    title: "First Day of Preschool",
+    description: "Arthur starts his educational journey",
+    details:
+      "Arthur was both excited and nervous for his first day of preschool. He picked out his favorite backpack and insisted on bringing his stuffed elephant for comfort. By pickup time, he had made two new friends and was already asking when he could go back.",
+    type: "achievement",
+    location: "Sunshine Preschool",
+    image: heroBackgroundImage,
   },
   {
-    id: '5',
-    date: 'July 14, 2019',
-    title: 'Learns to Swim',
-    description: 'Arthur conquers his fear of water',
-    details: 'After weeks of swimming lessons, Arthur finally swam across the pool without any assistance. His instructor cheered, and Arthur emerged from the water beaming with pride. This was a huge confidence boost for him.',
-    type: 'achievement',
-    location: 'Community Pool',
-    image: 'https://images.unsplash.com/photo-1552249352-02a0817a2d95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjB2YWNhdGlvbiUyMGJlYWNoJTIwc3VtbWVyfGVufDF8fHx8MTc1ODk5MDA2Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+    id: "5",
+    date: "July 14, 2019",
+    title: "Learns to Swim",
+    description: "Arthur conquers his fear of water",
+    details:
+      "After weeks of swimming lessons, Arthur finally swam across the pool without any assistance. His instructor cheered, and Arthur emerged from the water beaming with pride. This was a huge confidence boost for him.",
+    type: "achievement",
+    location: "Community Pool",
+    image: heroBackgroundImage,
   },
   {
-    id: '6',
-    date: 'December 25, 2020',
-    title: 'First Bike Ride',
-    description: 'Arthur masters riding without training wheels',
-    details: 'Christmas morning brought a special surprise - Arthur\'s first real bike. After a few wobbly attempts and one small tumble, he was off riding around the neighborhood with the biggest smile on his face.',
-    type: 'milestone',
-    location: 'Neighborhood Streets',
-    image: 'https://images.unsplash.com/photo-1595663823619-c46779b2d840?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZCUyMGxlYXJuaW5nJTIwYmljeWNsZSUyMHJpZGV8ZW58MXx8fHwxNzU4OTkwMDY1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
-  }
+    id: "6",
+    date: "December 25, 2020",
+    title: "First Bike Ride",
+    description: "Arthur masters riding without training wheels",
+    details:
+      "Christmas morning brought a special surprise - Arthur's first real bike. After a few wobbly attempts and one small tumble, he was off riding around the neighborhood with the biggest smile on his face.",
+    type: "milestone",
+    location: "Neighborhood Streets",
+    image: heroBackgroundImage,
+  },
 ];
 
 const typeStyles = {
-  birth: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-0 shadow-lg shadow-blue-500/25',
-  milestone: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 shadow-lg shadow-blue-500/25',
-  achievement: 'bg-gradient-to-r from-indigo-500 to-blue-500 text-white border-0 shadow-lg shadow-indigo-500/25',
-  memory: 'bg-gradient-to-r from-slate-500 to-blue-500 text-white border-0 shadow-lg shadow-slate-500/25'
+  birth:
+    "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-0 shadow-lg shadow-blue-500/25",
+  milestone:
+    "bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 shadow-lg shadow-blue-500/25",
+  achievement:
+    "bg-gradient-to-r from-indigo-500 to-blue-500 text-white border-0 shadow-lg shadow-indigo-500/25",
+  memory:
+    "bg-gradient-to-r from-slate-500 to-blue-500 text-white border-0 shadow-lg shadow-slate-500/25",
 };
 
 const typeIcons = {
   birth: Baby,
   milestone: Calendar,
   achievement: Trophy,
-  memory: Sparkles
+  memory: Sparkles,
 };
 
 const timelineColors = [
-  { bg: 'from-blue-400/15 to-indigo-400/15', accent: 'from-blue-500 to-indigo-500', dot: 'bg-blue-500' },
-  { bg: 'from-indigo-400/15 to-blue-400/15', accent: 'from-indigo-500 to-blue-500', dot: 'bg-indigo-500' },
-  { bg: 'from-slate-400/15 to-blue-400/15', accent: 'from-slate-500 to-blue-500', dot: 'bg-slate-500' },
-  { bg: 'from-blue-300/15 to-indigo-300/15', accent: 'from-blue-400 to-indigo-400', dot: 'bg-blue-400' },
-  { bg: 'from-indigo-300/15 to-slate-400/15', accent: 'from-indigo-400 to-slate-400', dot: 'bg-indigo-400' },
-  { bg: 'from-blue-500/15 to-slate-400/15', accent: 'from-blue-600 to-slate-500', dot: 'bg-blue-600' },
+  {
+    bg: "from-blue-400/15 to-indigo-400/15",
+    accent: "from-blue-500 to-indigo-500",
+    dot: "bg-blue-500",
+  },
+  {
+    bg: "from-indigo-400/15 to-blue-400/15",
+    accent: "from-indigo-500 to-blue-500",
+    dot: "bg-indigo-500",
+  },
+  {
+    bg: "from-slate-400/15 to-blue-400/15",
+    accent: "from-slate-500 to-blue-500",
+    dot: "bg-slate-500",
+  },
+  {
+    bg: "from-blue-300/15 to-indigo-300/15",
+    accent: "from-blue-400 to-indigo-400",
+    dot: "bg-blue-400",
+  },
+  {
+    bg: "from-indigo-300/15 to-slate-400/15",
+    accent: "from-indigo-400 to-slate-400",
+    dot: "bg-indigo-400",
+  },
+  {
+    bg: "from-blue-500/15 to-slate-400/15",
+    accent: "from-blue-600 to-slate-500",
+    dot: "bg-blue-600",
+  },
 ];
 
-function TimelineItem({ event, index }: { event: TimelineEvent; index: number }) {
+function TimelineItem({
+  event,
+  index,
+}: {
+  event: TimelineEvent;
+  index: number;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const IconComponent = typeIcons[event.type];
   const colorScheme = timelineColors[index % timelineColors.length];
 
@@ -114,11 +155,11 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ 
-          duration: 0.6, 
+        transition={{
+          duration: 0.6,
           delay: index * 0.1,
           type: "spring",
-          stiffness: 120
+          stiffness: 120,
         }}
         className="relative w-full"
       >
@@ -133,14 +174,14 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {/* Event Image - Now Featured at Top */}
             {event.image && (
               <div className="relative">
-                <img 
-                  src={event.image} 
+                <img
+                  src={event.image}
                   alt={event.title}
                   className="w-full h-48 sm:h-56 md:h-64 object-cover"
                 />
                 {/* Image overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                
+
                 {/* Timeline dot positioned on image */}
                 <div className="absolute top-4 left-4">
                   <motion.div
@@ -166,7 +207,12 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
 
                 {/* Event type badge on image */}
                 <div className="absolute top-4 right-4">
-                  <Badge variant="secondary" className={`${typeStyles[event.type]} px-3 py-1 bg-white/90 backdrop-blur-sm`}>
+                  <Badge
+                    variant="secondary"
+                    className={`${
+                      typeStyles[event.type]
+                    } px-3 py-1 bg-white/90 backdrop-blur-sm`}
+                  >
                     {event.type}
                   </Badge>
                 </div>
@@ -176,19 +222,23 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {/* Content Section */}
             <div className="p-6 space-y-4">
               {/* Date */}
-              <motion.div 
+              <motion.div
                 className="text-sm font-medium text-primary/70 bg-primary/5 px-3 py-2 rounded-full w-fit"
                 whileHover={{ scale: 1.05 }}
               >
                 {event.date}
               </motion.div>
-              
+
               {/* Title */}
-              <h3 className="text-xl font-bold text-foreground leading-tight">{event.title}</h3>
-              
+              <h3 className="text-xl font-bold text-foreground leading-tight">
+                {event.title}
+              </h3>
+
               {/* Description */}
-              <p className="text-foreground/80 leading-relaxed">{event.description}</p>
-              
+              <p className="text-foreground/80 leading-relaxed">
+                {event.description}
+              </p>
+
               {/* Location */}
               {event.location && (
                 <div className="flex items-center text-sm text-foreground/70 bg-primary/5 px-3 py-2 rounded-lg w-fit">
@@ -220,7 +270,9 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
           <div className="flex justify-center my-8">
             <motion.div
               initial={{ scaleY: 0, opacity: 0 }}
-              animate={isInView ? { scaleY: 1, opacity: 1 } : { scaleY: 0, opacity: 0 }}
+              animate={
+                isInView ? { scaleY: 1, opacity: 1 } : { scaleY: 0, opacity: 0 }
+              }
               transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
               className={`w-1 h-16 bg-gradient-to-b ${colorScheme.accent} rounded-full origin-top relative`}
             >
@@ -260,18 +312,18 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             <Badge className={`${typeStyles[event.type]} border w-fit`}>
               {event.type}
             </Badge>
-            
+
             {/* Event Image in Modal */}
             {event.image && (
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <img 
-                  src={event.image} 
+                <img
+                  src={event.image}
                   alt={event.title}
                   className="w-full h-64 object-cover"
                 />
               </div>
             )}
-            
+
             <p className="leading-relaxed">{event.details}</p>
           </div>
         </DialogContent>
@@ -282,10 +334,13 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
 
 export function Timeline() {
   const { scrollYProgress } = useScroll();
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="timeline" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-hidden">
+    <section
+      id="timeline"
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-hidden"
+    >
       {/* Dynamic Background - Optimized for Mobile */}
       <div className="absolute inset-0">
         <motion.div
@@ -293,7 +348,7 @@ export function Timeline() {
           className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-indigo-100/20 to-slate-100/15"
         />
         <div className="absolute inset-0 bg-gradient-to-tl from-blue-50/15 via-indigo-50/15 to-slate-50/10" />
-        
+
         {/* Simplified animated background elements for mobile performance */}
         {[...Array(6)].map((_, i) => (
           <motion.div
@@ -307,9 +362,11 @@ export function Timeline() {
               duration: 8 + i * 2,
               repeat: Infinity,
               delay: i * 1.2,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
-            className={`absolute w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gradient-to-br ${timelineColors[i % timelineColors.length].bg} rounded-full blur-xl opacity-20`}
+            className={`absolute w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gradient-to-br ${
+              timelineColors[i % timelineColors.length].bg
+            } rounded-full blur-xl opacity-20`}
             style={{
               left: `${15 + i * 15}%`,
               top: `${10 + (i % 4) * 20}%`,
@@ -342,8 +399,9 @@ export function Timeline() {
             Arthur's Life Timeline
           </h2>
           <p className="text-foreground/70 max-w-xl mx-auto text-base sm:text-lg leading-relaxed px-4 sm:px-0">
-            Follow Arthur's extraordinary journey through life's precious moments. 
-            Tap each milestone to discover the beautiful stories behind them.
+            Follow Arthur's extraordinary journey through life's precious
+            moments. Tap each milestone to discover the beautiful stories behind
+            them.
           </p>
         </motion.div>
 
