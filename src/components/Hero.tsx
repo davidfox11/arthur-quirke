@@ -1,11 +1,18 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import heroBackgroundImage from "../assets/hero-lg.jpg";
+import heroBackgroundImageLg from "../assets/hero-lg.jpg";
+import heroBackgroundImageSm from "../assets/hero-sm.png";
+import { useIsMobile } from "./ui/use-mobile";
 
 export function Hero() {
+  const isMobile = useIsMobile();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  const heroBackgroundImage = isMobile
+    ? heroBackgroundImageSm
+    : heroBackgroundImageLg;
 
   return (
     <section
