@@ -3,22 +3,36 @@
 import { useState, useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import { Badge } from "./ui/badge";
 import {
   Baby,
   MapPin,
   Heart,
   Sparkles,
   Clock,
-  Trophy,
-  Camera,
-  Star,
+  Home,
+  Car,
+  Rocket,
+  Users,
+  Gift,
+  Plane,
+  Sun,
+  Send,
+  Mountain,
+  Waves,
+  CakeSlice,
 } from "lucide-react";
 import timelineBirthImage from "../assets/born.jpg";
-import timelineFirstStepsImage from "../assets/images/timeline-first-steps.jpg";
-import timelineFirstDaySchoolImage from "../assets/images/timeline-first-day-school.jpg";
-import timelineFamilyVacationImage from "../assets/images/timeline-family-vacation.jpg";
-import timelineLittleArtistImage from "../assets/images/timeline-little-artist.jpg";
+import goingHomeImage from "../assets/going-home.jpg";
+import firstCorkImage from "../assets/first-cork.jpg";
+import cousinBondingImage from "../assets/cousin.jpg";
+import manUnitedImage from "../assets/manu.jpg";
+import xmasImage from "../assets/xmas.jpg";
+import portugalImage from "../assets/portugal.jpg";
+import goodbyeImage from "../assets/bye.jpg";
+import hikingImage from "../assets/wicklow.jpg";
+import swimImage from "../assets/swim.jpg";
+import birthdayImage from "../assets/bday.jpg";
+import amsterdamImage from "../assets/amsterdam.jpg";
 
 interface TimelineEvent {
   id: string;
@@ -26,7 +40,7 @@ interface TimelineEvent {
   date: string;
   description: string;
   detailedDescription: string;
-  type: "birth" | "milestone" | "achievement" | "memory" | "family";
+  icon: React.ElementType;
   location?: string;
   image?: string;
 }
@@ -35,75 +49,135 @@ const timelineEvents: TimelineEvent[] = [
   {
     id: "1",
     title: "Arthur is Born",
-    date: "September 9th",
+    date: "9th September 2024",
     description: "The beginning of an extraordinary journey",
     detailedDescription:
       "On this beautiful September morning, Arthur entered the world, bringing immense joy and love to his family. From his very first breath, it was clear that Arthur was destined for wonderful things. His bright eyes and gentle spirit immediately captured the hearts of everyone who met him.",
-    type: "birth",
-    location: "City Hospital",
+    icon: Baby,
+    location: "Merrion Square, Dublin",
     image: timelineBirthImage,
   },
   {
     id: "2",
-    title: "First Steps",
-    date: "June 15th",
-    description: "Arthur takes his first independent steps",
+    title: "Going Home",
+    date: "11th September 2024",
+    description: "Arthur goes home",
     detailedDescription:
-      "What a magical moment this was! Arthur had been cruising along furniture for weeks, building up his confidence and strength. Then, on this sunny June afternoon, he took those precious first steps across the living room, wobbling but determined, reaching for his favorite toy. The joy and pride on his face were absolutely priceless.",
-    type: "milestone",
-    location: "Family Home",
-    image: timelineFirstStepsImage,
+      "After a few days getting used to the world, Arthur goes to his first home in Ballsbridge with Mom and Dad",
+    icon: Home,
+    location: "Ballsbridge, Dublin",
+    image: goingHomeImage,
   },
   {
     id: "3",
-    title: "First Day at School",
-    date: "September 3rd",
-    description: "Beginning of educational adventures",
+    title: "First Visit to Cork",
+    date: "5th October 2024",
+    description: "Seeing the sites of Myrtleville and Glandore",
     detailedDescription:
-      "Arthur's first day at school was filled with excitement and wonder. Dressed in his new uniform with his bright red backpack, he was ready to take on the world. His teacher was immediately charmed by his curiosity and eagerness to learn. He made friends quickly and came home with stories about painting, story time, and all the new discoveries he made.",
-    type: "achievement",
-    location: "Sunshine Elementary",
-    image: timelineFirstDaySchoolImage,
+      "Arthur took a trip down to Cork to visit his grandparents in Myrtleville and Glandore",
+    icon: Car,
+    location: "Cork",
+    image: firstCorkImage,
   },
   {
     id: "4",
-    title: "Family Vacation",
-    date: "July 20th",
-    description: "Unforgettable memories at the beach",
+    title: "First Match as a United Fan",
+    date: "4th November 2024",
+    description: "Entering a life of hardship",
     detailedDescription:
-      "This family vacation to the seaside was Arthur's first time seeing the ocean. His wonder and excitement were infectious as he built sandcastles, collected seashells, and splashed in the gentle waves. The whole family treasures the memories of long walks on the beach, ice cream cones, and Arthur's delighted laughter echoing across the shore.",
-    type: "memory",
-    location: "Coastal Resort",
-    image: timelineFamilyVacationImage,
+      "Arthur was certainly less than impressed with his first match as a United fan",
+    icon: Rocket,
+    location: "Ballsbridge, Dublin",
+    image: manUnitedImage,
   },
   {
     id: "5",
-    title: "Little Artist",
-    date: "March 12th",
-    description: "Arthur creates his first masterpiece",
+    title: "Cousin Bonding",
+    date: "4th November 2024",
+    description: "Hanging out",
+    detailedDescription: "Arthur and cousin Alex having a blast together",
+    icon: Users,
+    location: "Ballsbridge, Dublin",
+    image: cousinBondingImage,
+  },
+  {
+    id: "6",
+    title: "First Christmas",
+    date: "25th December 2024",
+    description: "Enjoying the magic of Christmas",
     detailedDescription:
-      'Arthur\'s artistic talents began to shine when he created his first painting at art class. Using bold strokes and vibrant colors, he painted what he called "Rainbow Mountain" - a beautiful landscape that showed his developing creativity and unique perspective. This artwork now holds a special place on the family refrigerator.',
-    type: "achievement",
-    location: "Art Studio",
-    image: timelineLittleArtistImage,
+      "Arthur came down to Cork with his parents to spend Christmas in Myrtleville. He had a blast at the Christmas swim where he got to see everyone jumping into the freezing sea.",
+    icon: Gift,
+    location: "Myrtleville, Cork",
+    image: xmasImage,
+  },
+  {
+    id: "7",
+    title: "Visiting Amsterdam",
+    date: "9th January 2025",
+    description: "International jetsetter",
+    detailedDescription:
+      "Arthur boarded his first plane to visit his aunt Louise in Amsterdam",
+    icon: Plane,
+    location: "Amsterdam, Netherlands",
+    image: amsterdamImage,
+  },
+  {
+    id: "8",
+    title: "Sun Holiday",
+    date: "5th March 2025",
+    description: "Sunny vibes",
+    detailedDescription:
+      "After a taste for travel, Arthur took his parents on a sunny trip to Portugal to take a well earned break from the toll of everyday life",
+    icon: Sun,
+    location: "Faro, Portugal",
+    image: portugalImage,
+  },
+  {
+    id: "9",
+    title: "Saying Goodbyes",
+    date: "7th May 2025",
+    description: "It's been a blast",
+    detailedDescription:
+      "Arthur bid farewell to his aunt Lisa and uncle Conor as they left for a new adventure in Australia. Lisa and Arthur got to spend some great months bonding while she lived in Dublin",
+    icon: Send,
+    location: "Cork Airport",
+    image: goodbyeImage,
+  },
+  {
+    id: "10",
+    title: "Going Hiking",
+    date: "8th August 2025",
+    description: "Passenger prince",
+    detailedDescription:
+      "Arthur took to the Wiclow mountains for a hike with his parents. His dad had a sore pair of shoulders at the end of the day!",
+    icon: Mountain,
+    location: "Wicklow Mountains",
+    image: hikingImage,
+  },
+  {
+    id: "11",
+    title: "First Swim",
+    date: "11th August 2025",
+    description: "Testing the waters",
+    detailedDescription:
+      "After 'gentle' encouragement from his grandma, Arthur had his first outing in the sea at Myrtleville beach",
+    icon: Waves,
+    location: "Myrtleville, Cork",
+    image: swimImage,
+  },
+  {
+    id: "12",
+    title: "First Birthday",
+    date: "9th September 2025",
+    description: "Celebrating in style",
+    detailedDescription:
+      "Arthur got a full week of celebrations with an amazing cake at Creche, followed by a trip to Portugal to celebrate his first trip around the sun in style",
+    icon: CakeSlice,
+    location: "Faro, Portugal",
+    image: birthdayImage,
   },
 ];
-
-const typeIcons = {
-  birth: Baby,
-  milestone: Star,
-  achievement: Trophy,
-  memory: Camera,
-  family: Heart,
-};
-
-const typeStyles = {
-  birth: "bg-pink-100 text-pink-800 border-pink-300",
-  milestone: "bg-blue-100 text-blue-800 border-blue-300",
-  achievement: "bg-green-100 text-green-800 border-green-300",
-  memory: "bg-purple-100 text-purple-800 border-purple-300",
-  family: "bg-orange-100 text-orange-800 border-orange-300",
-};
 
 const timelineColors = [
   {
@@ -192,14 +266,6 @@ function TimelineNode({
 
             {/* Content */}
             <div className="flex-1 space-y-2">
-              {/* Event Type Badge */}
-              <Badge
-                variant="secondary"
-                className={`${typeStyles[event.type]} text-xs px-2 py-1 w-fit`}
-              >
-                {event.type}
-              </Badge>
-
               {/* Title */}
               <h3 className="font-bold text-gray-800 leading-tight group-hover:text-gray-900 transition-colors">
                 {event.title}
@@ -251,14 +317,6 @@ function TimelineNode({
 
             {/* Content */}
             <div className="text-center space-y-3">
-              {/* Event Type Badge */}
-              <Badge
-                variant="secondary"
-                className={`${typeStyles[event.type]} text-xs px-3 py-1`}
-              >
-                {event.type}
-              </Badge>
-
               {/* Title */}
               <h3 className="font-bold text-gray-800 leading-tight text-lg group-hover:text-gray-900 transition-colors">
                 {event.title}
@@ -316,7 +374,7 @@ function TimelineItem({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const IconComponent = typeIcons[event.type];
+  const IconComponent = event.icon;
   const colorScheme = timelineColors[index % timelineColors.length];
   const isEven = index % 2 === 0;
 
@@ -503,12 +561,6 @@ function TimelineItem({
               <div>
                 <DialogTitle className="text-2xl">{event.title}</DialogTitle>
                 <div className="flex items-center space-x-3 mt-2">
-                  <Badge
-                    variant="secondary"
-                    className={`${typeStyles[event.type]} text-sm`}
-                  >
-                    {event.type}
-                  </Badge>
                   <span className="text-sm text-gray-600 font-medium">
                     {event.date}
                   </span>

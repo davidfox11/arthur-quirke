@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Home, Clock, Camera, Heart, Map } from "lucide-react";
+import {
+  Menu,
+  Heart,
+  Image as ImageIcon,
+  Calendar,
+  Sparkles,
+  Home,
+} from "lucide-react";
+import artIcon from "../assets/art1.png";
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState("home");
@@ -41,9 +49,9 @@ export function Navigation() {
 
   const navItems = [
     { id: "home", label: "Home", icon: Home },
-    { id: "timeline", label: "Timeline", icon: Clock },
-    { id: "map", label: "Map", icon: Map },
-    { id: "gallery", label: "Gallery", icon: Camera },
+    { id: "timeline", label: "Timeline", icon: Calendar },
+    { id: "map", label: "Map", icon: ImageIcon },
+    { id: "gallery", label: "Gallery", icon: Sparkles },
   ];
 
   return (
@@ -62,49 +70,61 @@ export function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
-              <Heart className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center">
+              <img src={artIcon} alt="Art" className="w-4 h-4" />
             </div>
-            <span className="font-medium text-foreground">
-              Arthur's Journey
-            </span>
+            <span className="font-medium text-foreground">Arthur Quirke</span>
           </motion.div>
 
-          <div className="flex items-center space-x-1 bg-white/50 dark:bg-black/50 backdrop-blur-md border border-white/20 rounded-full p-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeSection === item.id;
+          <div className="hidden md:flex items-center space-x-1">
+            <a
+              href="https://photos.app.goo.gl/Q8sQ1aWJqW2fgy2V8"
+              className="group relative inline-flex items-center space-x-2 bg-gradient-to-br from-pink-500 to-rose-500 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 hover:from-pink-600 hover:to-rose-600 hover:shadow-lg hover:shadow-rose-500/30 text-sm"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <img src={artIcon} alt="Art" className="w-4 h-4" />
+              <span>Arthur's Art</span>
+            </a>
+          </div>
 
-              return (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 rounded-full text-sm transition-all duration-300 ${
-                    isActive
-                      ? "text-white"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeSection"
-                      className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
-                      transition={{
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.6,
-                      }}
-                    />
-                  )}
-                  <div className="relative flex items-center space-x-2">
-                    <Icon className="w-4 h-4" />
-                    <span className="hidden sm:inline">{item.label}</span>
-                  </div>
-                </motion.button>
-              );
-            })}
+          <div className="md:hidden">
+            <div className="flex items-center space-x-1 bg-white/50 dark:bg-black/50 backdrop-blur-md border border-white/20 rounded-full p-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+
+                return (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                      isActive
+                        ? "text-white"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSection"
+                        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                    <div className="relative flex items-center space-x-2">
+                      <Icon className="w-4 h-4" />
+                      <span className="hidden sm:inline">{item.label}</span>
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
