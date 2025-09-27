@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { Sparkles, ArrowDown } from "lucide-react";
-import heroBackgroundImage from "../assets/images/hero.jpg";
+import { ArrowDown } from "lucide-react";
+import heroBackgroundImage from "../assets/hero-lg.jpg";
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -20,42 +20,6 @@ export function Hero() {
           style={{
             backgroundImage: `url(${heroBackgroundImage})`,
           }}
-        />
-
-        {/* Artistic Overlay Effects */}
-        {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-blue-800/40 to-indigo-900/50" /> */}
-        {/* <div className="absolute inset-0 bg-gradient-to-tl from-slate-900/30 via-transparent to-blue-900/40" /> */}
-
-        {/* Sketch-like texture overlay */}
-        {/* <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-blue-100/10 mix-blend-overlay" /> */}
-
-        {/* Animated Light Rays */}
-        {/* <motion.div
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-0 left-1/4 w-96 h-full bg-gradient-to-b from-blue-200/10 via-blue-300/5 to-transparent transform -skew-x-12"
-        /> */}
-
-        {/* Floating Artistic Elements */}
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/4 right-1/4 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/30 rounded-full blur-xl"
         />
 
         {/* Bottom fade to content */}

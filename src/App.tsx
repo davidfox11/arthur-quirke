@@ -1,9 +1,9 @@
-import { Navigation } from "./components/Navigation";
-import { Hero } from "./components/Hero";
-import { Timeline } from "./components/Timeline";
-import { PhotoGallery } from "./components/PhotoGallery";
-import { Footer } from "./components/Footer";
-import React from "react";
+import { Navigation } from './components/Navigation';
+import { Hero } from './components/Hero';
+import { Timeline } from './components/Timeline';
+import { Map } from './components/Map';
+import { PhotoGallery } from './components/PhotoGallery';
+import { Footer } from './components/Footer';
 
 export default function App() {
   return (
@@ -11,6 +11,7 @@ export default function App() {
       <Navigation />
       <Hero />
       <Timeline />
+      <Map />
       <PhotoGallery />
       <Footer />
     </div>
