@@ -77,7 +77,7 @@ export function Navigation() {
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-1">
-            <a
+            <motion.a
               href="https://photos.app.goo.gl/Q8sQ1aWJqW2fgy2V8"
               className="group relative inline-flex items-center space-x-2 bg-gradient-to-br from-pink-500 to-rose-500 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 hover:from-pink-600 hover:to-rose-600 hover:shadow-lg hover:shadow-rose-500/30 text-sm"
               whileHover={{ y: -2 }}
@@ -85,7 +85,7 @@ export function Navigation() {
             >
               <img src={artIcon} alt="Art" className="w-4 h-4" />
               <span>Arthur's Art</span>
-            </a>
+            </motion.a>
           </div>
 
           <div className="md:hidden">
