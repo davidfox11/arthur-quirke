@@ -11,6 +11,8 @@ import davidImage from "../assets/uncle-david.jpg";
 import jennyImage from "../assets/aunt-jenny.jpg";
 import louImage from "../assets/aunt-lou.jpg";
 import lisaImage from "../assets/aunt-lisa.jpg";
+import declanImage from "../assets/declan.jpeg";
+
 interface Photo {
   id: string;
   src: string;
@@ -39,24 +41,30 @@ const photos: Photo[] = [
   },
   {
     id: "4",
+    src: declanImage,
+    title: "Granddad Declan",
+    date: "September 2024",
+  },
+  {
+    id: "5",
     src: davidImage,
     title: "Uncle David",
     date: "December 2024",
   },
   {
-    id: "5",
+    id: "6",
     src: jennyImage,
     title: "Aunt Jenny",
     date: "Summer 2023",
   },
   {
-    id: "6",
+    id: "7",
     src: louImage,
     title: "Aunt Louise",
     date: "January 2025",
   },
   {
-    id: "7",
+    id: "8",
     src: lisaImage,
     title: "Aunt Lisa",
     date: "May 2025",
